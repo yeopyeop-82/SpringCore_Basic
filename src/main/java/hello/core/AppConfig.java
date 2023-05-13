@@ -16,9 +16,13 @@ public class AppConfig {
 
     // 생성은 AppConfig가 담당한다.
     // 의존관계 주입
+    // @Bean memberService -> new MemoryMemberRepository()
+    // @Bean orderService -> new MemoryMemberRepository()
+    // 싱글톤이 깨질까요 ?
 
     @Bean //각 메서드에 bean .. -> 스프링 컨테이너에 등록이 된다.
     public MemberService memberService() {
+        System.out.println("call AppConfig.memberService");
         return new MemberServiceImpl(memberRepository());
         // 생성자 주입 !
         // 생성자를 통해 주입
@@ -28,8 +32,10 @@ public class AppConfig {
 
     @Bean
     public MemoryMemberRepository memberRepository() {
+        System.out.println("call AppConfig.memberRepository");
         return new MemoryMemberRepository();
     }
+
     @Bean
     public DiscountPolicy discountPolicy() {
         return new RateDiscountPolicy(); // 중복 제거 -> 한눈에 역할이 들어온다.
@@ -38,6 +44,7 @@ public class AppConfig {
 
     @Bean
     public OrderService orderService() {
+        System.out.println("call AppConfig.orderService");
         return new OrderServiceImpl(memberRepository(), discountPolicy());
         // 생성자 두개도 가능
     }

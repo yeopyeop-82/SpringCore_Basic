@@ -19,4 +19,10 @@ public class MemberServiceImpl implements MemberService {
     public Member findMember(Long memberId) {
         return memberRepository.findById(memberId); // 구현체가 하나면 뒤에 Impl 을 보통 붙인다.
     }
+
+    //테스트 용도
+
+    public MemberRepository getMemberRepository() {
+        return memberRepository;
+    }
 }
